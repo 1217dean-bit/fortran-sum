@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>黃冠儒 414210905 100分</title>
+<style>
+body{font-family:"Microsoft JhengHei","Noto Sans TC",sans-serif;max-width:900px;margin:0 auto;padding:24px;line-height:1.7;color:#222;background:#fafafa}
+h1{border-bottom:3px solid #2b6cb0;padding-bottom:8px}
+h2{color:#2b6cb0;margin-top:36px}
+section{background:#fff;border:1px solid #ddd;border-radius:8px;padding:16px 20px;margin:16px 0}
+pre{background:#1e1e1e;color:#eee;padding:12px;border-radius:6px;overflow-x:auto;font-size:14px}
+.q{background:#eef4fb;border-left:4px solid #2b6cb0;padding:8px 12px;margin-bottom:12px}
+table{border-collapse:collapse;width:100%}
+td,th{border:1px solid #ccc;padding:6px 10px;text-align:left}
+input{padding:4px 6px;width:95%;font-size:14px}
+.pass{color:#2f855a;font-weight:bold}.fail{color:#c53030;font-weight:bold}
+#total{font-size:28px;font-weight:bold;color:#2b6cb0}
+button{padding:8px 20px;font-size:16px;background:#2b6cb0;color:#fff;border:none;border-radius:6px;cursor:pointer}
+</style>
+</head>
+<body>
+<h1>黃冠儒｜414210905｜得分：<span id="hscore">100</span> 分</h1>
+<p>目標達成評分制：五題各 20 分，共 100 分。以下依序列出各題的題目、答題過程與結果，最後是第五題的評分系統。</p>
+
+<h2>第一題：寫出 1 加到 N 的 Fortran 程式並編譯執行（20 分）</h2>
+<section>
+<div class="q">指揮 AI 輸出一個能做 1 加到 N 的 Fortran 程式並完成編譯，確認可以成功執行計算並輸出結果。</div>
+<p>由 AI（Claude）產生的程式 <code>sum.f90</code>：</p>
+<pre>program sum_to_n
+  implicit none
+  integer(8) :: n, i, s
+  read(*,*) n
+  s = 0
+  do i = 1, n
+    s = s + i
+  end do
+  print *, s
+end program sum_to_n</pre>
+<p>過程：電腦教室的電腦沒有安裝 gfortran，所以改用 OnlineGDB 線上 Fortran 編譯器（GNU Fortran）編譯並執行。</p>
+<pre>輸入：100
+輸出：5050
+...Program finished with exit code 0</pre>
+<p class="pass">結果：編譯成功，執行結果 5050 正確。</p>
+</section>
+
+<h2>第二題：三次隨機驗證（20 分）</h2>
+<section>
+<div class="q">指揮 AI 執行該程式進行三次隨機的驗證，以確定該程式功能的正確性。</div>
+<p>驗證方法：用公式 N×(N+1)/2 算出正確答案，和程式輸出比對。</p>
+<table>
+<tr><th>次數</th><th>N</th><th>程式輸出</th><th>公式 N(N+1)/2</th><th>結果</th></tr>
+<tr><td>1</td><td>37</td><td>703</td><td>703</td><td class="pass">PASS</td></tr>
+<tr><td>2</td><td>256</td><td>32896</td><td>32896</td><td class="pass">PASS</td></tr>
+<tr><td>3</td><td>999</td><td>499500</td><td>499500</td><td class="pass">PASS</td></tr>
+</table>
+<p class="pass">結果：三次全部相符，程式功能正確。</p>
+</section>
+
+<h2>第三題：Git 版本控制（原版 → 逐行註解版）（20 分）</h2>
+<section>
+<div class="q">針對所開發的程式進行 Git 版本控制，將原版記錄（commit），之後指揮 AI 針對原程式碼進行逐行註解並編譯驗證成功後，再次記錄為新版。</div>
+<p>步驟一：在 Git Bash 建立 repo，提交原版</p>
+<pre>$ git init
+$ git add sum.f90
+$ git commit -m "v1 original"
+[master (root-commit) 1962838] v1 original
+ 1 file changed, 10 insertions(+)</pre>
+<p>步驟二：AI 產生的逐行註解版</p>
+<pre>program sum_to_n            ! program start: sum from 1 to N
+  implicit none             ! all variables must be declared
+  integer(8) :: n, i, s     ! n=upper limit, i=counter, s=sum (64-bit)
+  read(*,*) n               ! read N from keyboard
+  s = 0                     ! initialize sum to 0
+  do i = 1, n               ! loop i from 1 to N
+    s = s + i               ! add i to the sum
+  end do                    ! end of loop
+  print *, s                ! print the result
+end program sum_to_n        ! program end</pre>
+<p>步驟三：註解版編譯驗證（OnlineGDB）：輸入 100 → 輸出 5050，exit code 0。</p>
+<p>步驟四：提交新版</p>
+<pre>$ git commit -am "v2 add line-by-line comments"
+[master d3b1b50] v2 add line-by-line comments
+ 1 file changed, 10 insertions(+), 10 deletions(-)
+$ git log --oneline
+d3b1b50 (HEAD -> master) v2 add line-by-line comments
+1962838 v1 original</pre>
+<p class="pass">結果：兩個版本都已記錄。</p>
+</section>
+
+<h2>第四題：推送到 GitHub 雲端（20 分）</h2>
+<section>
+<div class="q">將本地端已經進行版本控制的程式碼，傳送到 GitHub 做雲端儲存。</div>
+<pre>$ git remote add origin https://github.com/1217dean-bit/fortran-sum.git
+$ git branch -M main
+$ git push -u origin main</pre>
+<p>GitHub 帳號透過瀏覽器授權（Authentication Succeeded）後推送成功。</p>
+<p>雲端儲存庫：<a href="https://github.com/1217dean-bit/fortran-sum">https://github.com/1217dean-bit/fortran-sum</a></p>
+<p class="pass">結果：程式碼和兩筆 commit 紀錄都已上傳到 GitHub。</p>
+</section>
+
+<h2>第五題：任務達成評分系統（20 分）</h2>
+<section>
+<div class="q">要求 AI 做一個任務達成評分系統，允許輸入前四題的結果，達標就給分。</div>
+<p>在下面輸入前四題的結果，按「評分」，系統會自動檢查每一題有沒有達標。欄位已預先填入本次答題的實際結果。</p>
+<table>
+<tr><th>題目</th><th>輸入結果</th><th>達標條件</th><th>得分</th></tr>
+<tr><td>一、N=100 的程式輸出</td><td><input id="q1" value="5050"></td><td>等於 5050</td><td id="s1"></td></tr>
+<tr><td>二、三次驗證<br><small>格式：N=輸出，用逗號分隔</small></td><td><input id="q2" value="37=703, 256=32896, 999=499500"></td><td>剛好三組，且每組都等於 N(N+1)/2</td><td id="s2"></td></tr>
+<tr><td>三、git log --oneline 的內容</td><td><input id="q3" value="d3b1b50 v2 add line-by-line comments; 1962838 v1 original"></td><td>至少 2 個 commit，且包含原版和註解版</td><td id="s3"></td></tr>
+<tr><td>四、GitHub repo 網址</td><td><input id="q4" value="https://github.com/1217dean-bit/fortran-sum"></td><td>是 github.com 的 repo 網址</td><td id="s4"></td></tr>
+<tr><td>五、評分系統本身</td><td colspan="2">系統可以正常執行評分</td><td id="s5"></td></tr>
+</table>
+<p><button onclick="grade()">評分</button></p>
+<p>總分：<span id="total">-</span></p>
+</section>
+
+<script>
+function mark(id, ok){
+  var el=document.getElementById(id);
+  el.textContent = ok ? "20 ✔" : "0 ✘";
+  el.className = ok ? "pass" : "fail";
+  return ok ? 20 : 0;
+}
+function grade(){
+  var t=0;
+  t+=mark("s1", document.getElementById("q1").value.trim()==="5050");
+  var pairs=document.getElementById("q2").value.split(/[,，]/).map(function(s){return s.trim();}).filter(Boolean);
+  var ok2 = pairs.length===3 && pairs.every(function(p){
+    var m=p.match(/^(\d+)\s*=\s*(\d+)$/); if(!m) return false;
+    var n=Number(m[1]); return n>=1 && Number(m[2])===n*(n+1)/2;
+  });
+  t+=mark("s2", ok2);
+  var log=document.getElementById("q3").value;
+  var hashes=log.match(/\b[0-9a-f]{7,40}\b/g)||[];
+  t+=mark("s3", hashes.length>=2 && /v1|original|原版/i.test(log) && /v2|comment|註解/i.test(log));
+  t+=mark("s4", /^https:\/\/github\.com\/[\w.-]+\/[\w.-]+\/?$/.test(document.getElementById("q4").value.trim()));
+  t+=mark("s5", true);
+  document.getElementById("total").textContent=t+" / 100";
+  document.getElementById("hscore").textContent=t;
+  document.title="黃冠儒 414210905 "+t+"分";
+}
+grade();
+</script>
+</body>
+</html>
